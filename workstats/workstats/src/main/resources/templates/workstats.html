@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Thông Tin Nguồn Lực Dự Án</title>
+</head>
+<body>
+
+	<div class="table">
+		<table border="1">
+			<tr>
+				<!-- 	<th>STT</th>
+				<th>Họ và Tên</th>
+				<th>Email</th>
+
+				<th>Thời gian than gia dự án theo kế hoạch (Hours)</th>
+				<th>Khối lượng công việc được giao</th>
+				<th>KLCV Hoàn thành</th>
+				<th>KLCV chưa hoàn thành</th>
+				<th>Khối lượng cv vượt kế hoạch</th> -->
+				<th>Id</th>
+				<th>Month</th>
+				<th>WorkData</th>
+				<th>UserID</th>
+				<th>FullName</th>
+				<th>Email</th>
+			</tr>
+			<tr th:each="stats: ${listMonthlyStats}">
+				<td><span th:text=${stats.getId()}></span></td>
+				<td><span th:text=${stats.getMonth()}></span></td>
+				<td><span th:text=${stats.getWorkData()}></span></td>
+				<td><span th:text=${stats.getUserId()}></span></td>
+				<td><span th:text=${stats.getFullName()}></span></td>
+				<td><span th:text=${stats.getEmail()}></span></td>
+			</tr>
+</body>
+</html>
