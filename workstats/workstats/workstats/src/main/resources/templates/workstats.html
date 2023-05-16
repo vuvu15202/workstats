@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <style>
+        body {
+            margin: 0px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .scrollbar {
+            width: 3000px;
+            Overflow-y: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Thông tin nguồn lực dự án(2023 - 2030)</h1>
+    <br>
+    <div style="width: 90%; border: 1px solid black; margin: auto auto;">
+        <br>
+        <div>
+            Họ và tên <input type="text">
+            Năm <select name="years" id="years">
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+                </select>
+            Tháng 
+            <select name="months" id="months">
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+           Email <input type="text">
+           Dự án<input type="text">
+        </div>
+        <br>
+        <br>
+        <hr>
+        <div>
+            <button>Tìm kiếm</button>
+        </div>
+        <br>
+        <br>
+        <div style="overflow-y: hidden;">
+            <table  class="scrollbar" border="1" style="border-collapse: collapse;">
+                <tr>
+                    <th rowspan="3">STT</th>
+                    <th rowspan="3">Họ và tên</th>
+                    <th rowspan="3">Email</th>
+                    <th colspan="17">Dự án</th>
+
+                </tr>
+                <tr>
+                    <th rowspan="2">Thời gian tham gia dự án theo kế hoạch (Hours)</th>
+                    <th rowspan="2">Khối lượng công việc được giao (Point)</th>
+                    <th rowspan="2">KLCV Hoàn thành (Point)</th>
+                    <th rowspan="2">KLCV chưa hoàn thành (point)</th>
+                    <th rowspan="2">Khối lượng cv vượt kế hoạch (Point)</th>
+                    <th rowspan="2">KLCV trước hạn (Point)</th>
+                    <th rowspan="2">KLCV trễ hạn (Point)</th>
+                    <th rowspan="2">Khối lượng cv Reopen (Point)</th>
+                    <th rowspan="2">Tổng thời gian logwork (Hours)</th>
+                    <th colspan="4">Số bug được tạo ra trong tháng</th>
+                    <th colspan="4">Số bug được tạo ra trong tháng</th>
+
+                </tr>
+                <tr>
+                    <th>Fatal</th>
+                    <th>Serious</th>
+                    <th>Medium</th>
+                    <th>Cosmetic</th>
+                    <th>Fatal</th>
+                    <th>Serious</th>
+                    <th>Medium</th>
+                    <th>Cosmetic</th>
+                </tr>
+
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                </tr>
+                <tr>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td>Germany</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+    
+    
+</body>
+
+</html>

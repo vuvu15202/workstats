@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Insert title here</title>
+    <style>
+        body {
+            margin: 0px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .scrollbar {
+           max-width: 100%;
+            
+        }
+        .content{
+            width: 95%; height: 600px; border: 1px solid black; margin: auto auto; Overflow-x: hidden;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>Thông tin nguồn lực dự án(2023 - 2030)</h1>
+</br>
+    <div class="content" >
+    </br>
+        <div id="search">
+            Họ và tên <input id="fullName" type="text">
+            Năm <select id="year" name="years">
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+            </select>
+            Tháng
+            <select id="month" name="months">
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+                <option value="09">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            Email <input id="email" type="text">
+            Dự án<input type="text">
+        </div>
+    </br>
+</br>
+        <hr>
+        <div>
+            <button id="search-button">Tìm kiếm</button>
+        </div>
+    </br>
+</br>
+        <div style="overflow-y: hidden;">
+            <table id="table" class="scrollbar" border="1" style="border-collapse: collapse;">
+                <tr id="duan">
+                    <th rowspan="2">STT</th>
+                    <th rowspan="2">Họ và tên</th>
+                    <th rowspan="2">Email</th>
+                    <th rowspan="2">Project</th>
+                    <th rowspan="2">Thời gian tham gia dự án theo kế hoạch (Hours)</th>
+                    <th rowspan="2">Khối lượng công việc được giao (Point)</th>
+                    <th rowspan="2">KLCV Hoàn thành (Point)</th>
+                    <th rowspan="2">KLCV chưa hoàn thành (point)</th>
+                    <th rowspan="2">Khối lượng cv vượt kế hoạch (Point)</th>
+                    <th rowspan="2">KLCV trước hạn (Point)</th>
+                    <th rowspan="2">KLCV trễ hạn (Point)</th>
+                    <th rowspan="2">Khối lượng cv Reopen (Point)</th>
+                    <th rowspan="2">Tổng thời gian logwork (Hours)</th>
+                    <th colspan="4">Số bug được tạo ra trong tháng</th>
+                    <th colspan="4">Số bug được tạo ra trong tháng</th>
+                </tr>
+                
+                <tr id="duan3">
+                    <th>Fatal</th>
+                    <th>Serious</th>
+                    <th>Medium</th>
+                    <th>Cosmetic</th>
+                    <th>Fatal</th>
+                    <th>Serious</th>
+                    <th>Medium</th>
+                    <th>Cosmetic</th>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+    <!-- <div id="api-data"></div>-->
+    <div id="data-container"></div>
+    <div id="workList"></div>
+</body>
+<script>
+
+$(function() {
+    $('#search-button').click(function() {
+        searchEmployees();
+    });
+});
+
+function searchEmployees() {
+    var query = $('#search-input').val();
+    var fullName = document.getElementById('fullName').value;
+    var year = document.getElementById('year').value;
+    var month = document.getElementById('month').value;
+    var email = document.getElementById('email').value;
+    $.get('/stats/search?fullName='+fullName+'&email='+email+'&month='+month+'&year='+year, function(data) {
+        const workList = document.getElementById('table'); workList.innerHTML=`<tr id="duan">
+                    <th rowspan="2">STT</th>
+                    <th rowspan="2">Họ và tên</th>
+                    <th rowspan="2">Email</th>
+                    <th rowspan="2">Project</th>
+                    <th rowspan="2">Thời gian tham gia dự án theo kế hoạch (Hours)</th>
+                    <th rowspan="2">Khối lượng công việc được giao (Point)</th>
+                    <th rowspan="2">KLCV Hoàn thành (Point)</th>
+                    <th rowspan="2">KLCV chưa hoàn thành (point)</th>
+                    <th rowspan="2">Khối lượng cv vượt kế hoạch (Point)</th>
+                    <th rowspan="2">KLCV trước hạn (Point)</th>
+                    <th rowspan="2">KLCV trễ hạn (Point)</th>
+                    <th rowspan="2">Khối lượng cv Reopen (Point)</th>
+                    <th rowspan="2">Tổng thời gian logwork (Hours)</th>
+                    <th colspan="4">Số bug được tạo ra trong tháng</th>
+                    <th colspan="4">Số bug được tạo ra trong tháng</th>
+                </tr>
+                
+                <tr id="duan3">
+                    <th>Fatal</th>
+                    <th>Serious</th>
+                    <th>Medium</th>
+                    <th>Cosmetic</th>
+                    <th>Fatal</th>
+                    <th>Serious</th>
+                    <th>Medium</th>
+                    <th>Cosmetic</th>
+                </tr>`;
+        console.log(data);
+    data.forEach(item => {
+        const stt = item.id;
+            const hovaten = item.fullName;
+            const email = item.email;
+            var newEle = document.createElement('tr');
+            newEle.innerHTML = `<td rowspan="${(item.workData).length+1}">${stt}</td>
+                                        <td rowspan="${(item.workData).length+1}">${hovaten}</td>
+                                    <td rowspan="${(item.workData).length+1}">${email}</td>`;
+                                    workList.appendChild(newEle);
+        (item.workData).forEach(workdata =>{
+            const project = workdata.projectName;
+            const originalEstimated = Math.round(workdata.originalEstimated/3600);
+            const workLoggedInHours = workdata.workLoggedInHours;
+            const donePoint = workdata.donePoint;
+            const notDonePoint = workdata.notDonePoint;
+            const overDuePoint = workdata.overDuePoint;
+            const earlyDuePoint = workdata.earlyDuePoint;
+            const overPlanPoint = workdata.overPlanPoint;
+            const reopenPoint = workdata.reopenPoint;
+            const totalLogwork = Math.round(workdata.totalLogwork/3600);
+            const fatalBug = workdata.fatalBug;
+            const seriousBug = workdata.seriousBug;
+            const mediumBug = workdata.mediumBug;
+            const cosmeticBug = workdata.cosmeticBug;
+            const fatalBugReport = workdata.fatalBugReport;
+            const seriousBugReport = workdata.seriousBugReport;
+            const mediumBugReport = workdata.mediumBugReport;
+            const cosmeticBugReport = workdata.cosmeticBugReport;
+
+            var newEle1 = document.createElement('tr');
+            newEle1.innerHTML = `<td> ${project}</td>
+                                            <td>${originalEstimated}</td>
+                                                <td> ${workLoggedInHours}</td>
+                                                    <td> ${donePoint}</td>
+                                                        <td> ${notDonePoint}</td>
+                                                            <td> ${overDuePoint}</td>
+                                                                <td> ${earlyDuePoint}</td>
+                                                                    <td> ${overPlanPoint}</td>
+                                                                        <td> ${reopenPoint}</td>
+                                                                        <td> ${totalLogwork}</td>
+                                                                            <td> ${fatalBug}</td>
+                                                                                <td> ${seriousBug}</td>
+                                                                                    <td> ${mediumBug}</td>
+                                                                                        <td> ${cosmeticBug}</td>
+                                                                                            <td> ${fatalBugReport}</td>
+                                                                                                <td> ${seriousBugReport}</td>
+                                                                                                    <td> ${mediumBugReport}</td>
+                                                                                                        <td> ${cosmeticBugReport}</td>
+                                                                                                        `; workList.appendChild(newEle1);
+
+        });
+      
+       
+    });
+    });
+}
+   
+
+fetch('http://localhost:8088/stats/testAPI')
+  .then(response => response.json())
+  .then(data => {
+    const workList = document.getElementById('table');
+    data.forEach(item => {
+        const stt = item.id;
+            const hovaten = item.fullName;
+            const email = item.email;
+            var newEle = document.createElement('tr');
+            newEle.innerHTML = `<td rowspan="${(item.workData).length+1}">${stt}</td>
+                                        <td rowspan="${(item.workData).length+1}">${hovaten}</td>
+                                    <td rowspan="${(item.workData).length+1}">${email}</td>`;
+                                    workList.appendChild(newEle);
+        (item.workData).forEach(workdata =>{
+            const project = workdata.projectName;
+            const originalEstimated = Math.round(workdata.originalEstimated/3600);
+            const workLoggedInHours = workdata.workLoggedInHours;
+            const donePoint = workdata.donePoint;
+            const notDonePoint = workdata.notDonePoint;
+            const overDuePoint = workdata.overDuePoint;
+            const earlyDuePoint = workdata.earlyDuePoint;
+            const overPlanPoint = workdata.overPlanPoint;
+            const reopenPoint = workdata.reopenPoint;
+            const totalLogwork = Math.round(workdata.totalLogwork/3600);
+            const fatalBug = workdata.fatalBug;
+            const seriousBug = workdata.seriousBug;
+            const mediumBug = workdata.mediumBug;
+            const cosmeticBug = workdata.cosmeticBug;
+            const fatalBugReport = workdata.fatalBugReport;
+            const seriousBugReport = workdata.seriousBugReport;
+            const mediumBugReport = workdata.mediumBugReport;
+            const cosmeticBugReport = workdata.cosmeticBugReport;
+
+            var newEle1 = document.createElement('tr');
+            newEle1.innerHTML = `<td> ${project}</td>
+                                            <td>${originalEstimated}</td>
+                                                <td> ${workLoggedInHours}</td>
+                                                    <td> ${donePoint}</td>
+                                                        <td> ${notDonePoint}</td>
+                                                            <td> ${overDuePoint}</td>
+                                                                <td> ${earlyDuePoint}</td>
+                                                                    <td> ${overPlanPoint}</td>
+                                                                        <td> ${reopenPoint}</td>
+                                                                        <td> ${totalLogwork}</td>
+                                                                            <td> ${fatalBug}</td>
+                                                                                <td> ${seriousBug}</td>
+                                                                                    <td> ${mediumBug}</td>
+                                                                                        <td> ${cosmeticBug}</td>
+                                                                                            <td> ${fatalBugReport}</td>
+                                                                                                <td> ${seriousBugReport}</td>
+                                                                                                    <td> ${mediumBugReport}</td>
+                                                                                                        <td> ${cosmeticBugReport}</td>
+                                                                                                        `; workList.appendChild(newEle1);
+
+        });
+      
+       
+    });
+  });
+
+
+</script>
+
+</html>
