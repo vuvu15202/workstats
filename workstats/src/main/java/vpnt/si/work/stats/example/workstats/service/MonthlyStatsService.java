@@ -17,9 +17,9 @@ public class MonthlyStatsService implements IMonthlyStatsService {
 		return monthlyStatsRepository.findAll();
 	}
 	@Override
-	public List<MonthlyStats> listMonthlyStatsSearch(String fullName, String email, String month, String year) {
+	public List<MonthlyStats> listMonthlyStatsSearch(String fullName, String email, String month, String year, String project) {
 		
-		return monthlyStatsRepository.searchByAll(fullName, email, month, year);
+		return monthlyStatsRepository.searchByAll(fullName, email, month, year, project);
 	}
 	
 }

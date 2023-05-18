@@ -1,6 +1,8 @@
 package vpnt.si.work.stats.example.workstats.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +90,7 @@ public class MonthlyStatsController {
 				
 			}
 		}
+		Collections.sort(listProject);
 		return new ResponseEntity<>(listProject, HttpStatus.OK);
 	}
 	
@@ -128,8 +131,8 @@ public class MonthlyStatsController {
 	@GetMapping("/search")
 	public ResponseEntity<List<MonthlyStatsDTO>> listMonthlySearchByFullName(@RequestParam("fullName") String fullName,
 			@RequestParam("email") String email, @RequestParam("month") String month,
-			@RequestParam("year") String year) {
-		List<MonthlyStats> listMonthlyStats = iMonthlyStatsService.listMonthlyStatsSearch(fullName, email, month, year);
+			@RequestParam("year") String year, @RequestParam("project") String project) {
+		List<MonthlyStats> listMonthlyStats = iMonthlyStatsService.listMonthlyStatsSearch(fullName, email, month, year, project);
 
 		List<MonthlyStatsDTO> listMonthlyStatsDTO = new ArrayList<>();
 		for (MonthlyStats item : listMonthlyStats) {

@@ -1,31 +1,159 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html>
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Project force</title>
     <style>
         body {
-            margin: 0px;
-            box-sizing: border-box;
-            text-align: center;
-        }
+    margin: 0px;
+    box-sizing: border-box;
+    text-align: center !important;
+    
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
 
-        .scrollbar {
-            width: 3000px;
-            Overflow-y: hidden;
-        }
+.odd {
+    background-color: rgb(202, 222, 243);
+}
+
+.content {
+    width: 94%;
+    height: 640px;
+    margin: auto auto;
+    Overflow-x: hidden;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 1px grey;
+    background-color: rgba(232, 236, 248, 0.69) !important;
+}
+
+.table-scroll {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin: auto;
+    overflow: auto;
+    height: 480px;
+}
+
+.table-scroll table {
+    max-width: 90%; margin: auto auto;
+}
+
+.table-wrap {
+    position: relative;
+}
+
+.table-scroll th {
+    border: 2px solid #5086fa;
+
+    vertical-align: top;
+}
+
+.table-scroll td {
+    border: 2px solid #729efd;
+
+    vertical-align: top;
+}
+
+.table-scroll thead {
+    background: rgb(140, 193, 249);
+    color: #0e036f;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    border: 2px solid #729efd;
+    z-index: 2;
+}
+.main-table div:first-child{background-color:  #729efd; z-index: 4; position: -webkit-sticky;
+    position: sticky;}
+
+.stickyCol {
+    background: rgb(255, 255, 255);
+    color: #0e036f;
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0px;
+    border: 2px solid #729efd;
+    z-index: 0;
+}
+
+/* safari and ios need the tfoot itself to be position:sticky also */
+.table-scroll tfoot,
+.table-scroll tfoot th,
+.table-scroll tfoot td {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    background: midnightblue;
+    color: #fff;
+    z-index: 4;
+}
+
+a:focus {
+    background: red;
+}
+
+/* testing links*/
+thead th:first-child,
+tfoot th:first-child {
+    z-index: 5;
+}
+
+
+#search {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+#search div {
+    margin: 0px 25px;
+}
+#search input:hover, select:hover {
+    background-color: rgba(252, 252, 147, 0.808);
+}
+input, select{border-radius: 5px; border: 1px solid grey;}
+label{margin-right: 8px;}
+
+.truncate-text {
+    max-width: 200px;
+    /* Adjust the max-width value as needed */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+thead tr {
+    border: 2px solid #729efd;
+    padding: 0px 0px;
+    margin: 0px 0px;
+}
+
+.secondheader {
+    border-top: 3px solid #5086fa;
+}
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <h1>Thông tin nguồn lực dự án(2023 - 2030)</h1>
-    <br>
-    <div style="width: 90%; border: 1px solid black; margin: auto auto;">
-        <br>
-        <div>
-            Họ và tên <input type="text">
-            Năm <select name="years" id="years">
+    </br>
+    <div class="content">
+        <div id="search">
+
+            <div>  
+                <label for="fullName">Họ và tên</label>
+                <input id="fullName" type="text"> </div>
+            <div>
+                <label for="year">Năm</label> 
+                <select id="year" name="years">
+                    <option selected="true" value=""></option>
                     <option value="2023">2023</option>
                     <option value="2024">2024</option>
                     <option value="2025">2025</option>
@@ -34,115 +162,327 @@
                     <option value="2028">2028</option>
                     <option value="2029">2029</option>
                     <option value="2030">2030</option>
+                </select> </div>
+            <div>
+                <label for="month">Tháng</label>
+                <select id="month" name="months">
+                    <option selected="true" value=""></option>
+                    <option value="01">1</option>
+                    <option value="02">2</option>
+                    <option value="03">3</option>
+                    <option value="04">4</option>
+                    <option value="05">5</option>
+                    <option value="06">6</option>
+                    <option value="07">7</option>
+                    <option value="08">8</option>
+                    <option value="09">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
                 </select>
-            Tháng 
-            <select name="months" id="months">
-                <option value="01">1</option>
-                <option value="02">2</option>
-                <option value="03">3</option>
-                <option value="04">4</option>
-                <option value="05">5</option>
-                <option value="06">6</option>
-                <option value="07">7</option>
-                <option value="08">8</option>
-                <option value="09">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-            </select>
-           Email <input type="text">
-           Dự án<input type="text">
+            </div>
+            <div> 
+                <label for="email">Email</label> 
+                <input id="email" type="text"> </div>
+            <div> 
+                <label for="project">Dự án</label>
+                <select id="project" name="project">
+                    <option selected="true" value=""></option>
+                </select>
+            </div>
+
         </div>
-        <br>
-        <br>
         <hr>
         <div>
-            <button>Tìm kiếm</button>
+            <button id="search-button" class="btn btn-info">Tìm kiếm</button>
         </div>
-        <br>
-        <br>
-        <div style="overflow-y: hidden;">
-            <table  class="scrollbar" border="1" style="border-collapse: collapse;">
-                <tr>
-                    <th rowspan="3">STT</th>
-                    <th rowspan="3">Họ và tên</th>
-                    <th rowspan="3">Email</th>
-                    <th colspan="17">Dự án</th>
+        </br>
+        <div id="table-scroll" class="table-scroll">
+            <table id="main-table" class="main-table  table-responsive" border="1">
+                
+                <thead>
+                    <tr class="">
+                        <th scope="col" rowspan="2">STT</th>
+                        <th scope="col" rowspan="2">Họ và tên</th>
+                        <th scope="col" rowspan="2">Email</th>
+                        <th scope="col" rowspan="2">Project</th>
+                        <th scope="col" rowspan="2">Thời gian tham gia dự án theo kế hoạch (Hours)</th>
+                        <th scope="col" rowspan="2">Khối lượng công việc được giao (Point)</th>
+                        <th scope="col" rowspan="2">KLCV Hoàn thành (Point)</th>
+                        <th scope="col" rowspan="2">KLCV chưa hoàn thành (point)</th>
+                        <th scope="col" rowspan="2">Khối lượng cv vượt kế hoạch (Point)</th>
+                        <th scope="col" rowspan="2">KLCV trước hạn (Point)</th>
+                        <th scope="col" rowspan="2">KLCV trễ hạn (Point)</th>
+                        <th scope="col" rowspan="2">Khối lượng cv Reopen (Point)</th>
+                        <th scope="col" rowspan="2">Tổng thời gian logwork (Hours)</th>
+                        <th scope="col" colspan="4">Số bug được tạo ra trong tháng</th>
+                        <th scope="col" colspan="4">Số bug được tạo ra trong tháng</th>
+                    </tr>
 
-                </tr>
-                <tr>
-                    <th rowspan="2">Thời gian tham gia dự án theo kế hoạch (Hours)</th>
-                    <th rowspan="2">Khối lượng công việc được giao (Point)</th>
-                    <th rowspan="2">KLCV Hoàn thành (Point)</th>
-                    <th rowspan="2">KLCV chưa hoàn thành (point)</th>
-                    <th rowspan="2">Khối lượng cv vượt kế hoạch (Point)</th>
-                    <th rowspan="2">KLCV trước hạn (Point)</th>
-                    <th rowspan="2">KLCV trễ hạn (Point)</th>
-                    <th rowspan="2">Khối lượng cv Reopen (Point)</th>
-                    <th rowspan="2">Tổng thời gian logwork (Hours)</th>
-                    <th colspan="4">Số bug được tạo ra trong tháng</th>
-                    <th colspan="4">Số bug được tạo ra trong tháng</th>
+                    <tr class="secondheader">
+                        <th scope="col">Fatal</th>
+                        <th scope="col">Serious</th>
+                        <th scope="col">Medium</th>
+                        <th scope="col">Cosmetic</th>
+                        <th scope="col">Fatal</th>
+                        <th scope="col">Serious</th>
+                        <th scope="col">Medium</th>
+                        <th scope="col">Cosmetic</th>
+                    </tr>
+                </thead>
+            
 
-                </tr>
-                <tr>
-                    <th>Fatal</th>
-                    <th>Serious</th>
-                    <th>Medium</th>
-                    <th>Cosmetic</th>
-                    <th>Fatal</th>
-                    <th>Serious</th>
-                    <th>Medium</th>
-                    <th>Cosmetic</th>
-                </tr>
-
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                </tr>
-                <tr>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                    <td>Germany</td>
-                    <td>Alfreds Futterkiste</td>
-                    <td>Maria Anders</td>
-                </tr>
+                <tbody id="tbody"></tbody>
             </table>
 
 
         </div>
     </div>
-    
-    
+
+    <!-- <div id="api-data"></div>-->
+    <div id="data-container"></div>
+    <div id="workList"></div>
 </body>
+<script>
+    // $(document).ready(function(){
+    // 	$("tr:odd").addClass("odd");
+    // });
+
+    $(function () {
+        $('#search-button').click(function () {
+            searchEmployees();
+        });
+    });
+
+    function searchEmployees() {
+        var query = $('#search-input').val();
+        var fullName = document.getElementById('fullName').value;
+        var year = document.getElementById('year').value;
+        var month = document.getElementById('month').value;
+        var email = document.getElementById('email').value;
+        var project = document.getElementById('project').value;
+        let count = 1;
+        $.get('/stats/search?fullName=' + fullName + '&email=' + email + '&month=' + month + '&year=' + year + '&project=' + project, function (data) {
+            const workList = document.getElementById('tbody'); workList.innerHTML = '';
+
+            console.log(data);
+            data.forEach(item => {
+                const stt = item.id;
+                const hovaten = item.fullName;
+                const email = item.email;
+                var newEle = document.createElement('tr');
+                newEle.innerHTML = `<td class="stickyCol" rowspan="${(item.workData).length + 1}">${stt}</td>
+                                        <td class="stickyCol truncate-text" rowspan="${(item.workData).length + 1}">${hovaten}</td>
+                                    <td rowspan="${(item.workData).length + 1}">${email}</td>`;
+                workList.appendChild(newEle);
+                (item.workData).forEach(workdata => {
+                    count++;
+                    const project = workdata.projectName;
+                    const originalEstimated = Math.round(workdata.originalEstimated / 3600);
+                    const workLoggedInHours = Math.round(workdata.workLoggedInHours / 3600);
+                    const donePoint = Math.round(workdata.donePoint / 3600);
+                    const notDonePoint = Math.round(workdata.notDonePoint / 3600);
+                    const overDuePoint = Math.round(workdata.overDuePoint / 3600);
+                    const earlyDuePoint = Math.round(workdata.earlyDuePoint / 3600);
+                    const overPlanPoint = Math.round(workdata.overPlanPoint / 3600);
+                    const reopenPoint = Math.round(workdata.reopenPoint / 3600);
+                    const missing = Math.round(workdata.missing / 3600);
+                    const fatalBug = Math.round(workdata.fatalBug / 3600);
+                    const seriousBug = Math.round(workdata.seriousBug / 3600);
+                    const mediumBug = Math.round(workdata.mediumBug / 3600);
+                    const cosmeticBug = Math.round(workdata.cosmeticBug / 3600);
+                    const fatalBugReport = Math.round(workdata.fatalBugReport / 3600);
+                    const seriousBugReport = Math.round(workdata.seriousBugReport / 3600);
+                    const mediumBugReport = Math.round(workdata.mediumBugReport / 3600);
+                    const cosmeticBugReport = Math.round(workdata.cosmeticBugReport / 3600);
+
+                    var newEle1 = document.createElement('tr');
+                    newEle1.innerHTML = `<td> ${project}</td>
+                                <td>${originalEstimated}</td>
+                                    <td> ${missing}</td>
+                                        <td> ${donePoint}</td>
+                                            <td> ${notDonePoint}</td>
+                                                <td> ${overDuePoint}</td>
+                                                    <td> ${earlyDuePoint}</td>
+                                                        <td> ${overPlanPoint}</td>
+                                                            <td> ${reopenPoint}</td>
+                                                            <td> ${workLoggedInHours}</td>
+                                                                <td> ${fatalBug}</td>
+                                                                    <td> ${seriousBug}</td>
+                                                                        <td> ${mediumBug}</td>
+                                                                            <td> ${cosmeticBug}</td>
+                                                                                <td> ${fatalBugReport}</td>
+                                                                                    <td> ${seriousBugReport}</td>
+                                                                                        <td> ${mediumBugReport}</td>
+                                                                                            <td> ${cosmeticBugReport}</td>
+                                                                                            `; workList.appendChild(newEle1);
+                    if ((parseInt(count)) % 2 !== 0) {
+                        newEle1.classList.add('odd');
+                    }
+                });
+            });
+        });
+    }
+
+
+    //print all
+    var postApi = 'http://localhost:8088/stats/projectAPI';
+    fetch(postApi).then(function (response) {
+        return response.json();
+    }).then(function (projects) {
+        console.log(projects); projectList = projects;
+        const project = document.getElementById('project');
+        for (let i = 0; i < projects.length; i++) {
+
+            project.innerHTML += `<option value="${projects[i]}">${projects[i]}</option>`;
+
+        }
+    }).catch(function (err) {
+        console.log('error fetching api!');
+    })
+
+    // const apiUrl = 'http://localhost:8088/stats/testAPI';
+    // fetch(apiUrl)
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data); // check if data is retrieved successfully
+
+    //         // process the data and display it on the HTML page
+    //         const apiDataElement = document.getElementById('api-data');
+    //         let html = '<ul>';
+
+    //         for (let key in data) {
+    //             html += `<li>${key}: ${data[key].workData.projectName}, ${data[key].workLoggedInHours}, ${data[key].donePoint}</li>`;
+    //         }
+
+    //         html += '</ul>';
+    //         apiDataElement.innerHTML = html;
+    //     })
+    //     .catch(error => {
+    //         console.error('Error:', error);
+    //     });
+
+
+
+
+
+
+    //       fetch('http://localhost:8088/stats/testAPI')
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     const workList = document.getElementById('workList');
+    //     data.forEach(item => {
+    //         const hovaTen = item.fullName;
+    //       const project = item.workData[0].projectName;
+    //       const originalEstimated = item.workData[0].originalEstimated;
+    //       const workLoggedInHours = item.workData[0].workLoggedInHours;
+    //       const donePoint = item.workData[0].donePoint;
+    //       const notDonePoint = item.workData[0].notDonePoint;
+    //       const overDuePoint = item.workData[0].overDuePoint;
+    //       const earlyDuePoint = item.workData[0].earlyDuePoint;
+    //       const overPlanPoint = item.workData[0].overPlanPoint;
+    //       const reopenPoint = item.workData[0].reopenPoint;
+    //       const fatalBug = item.workData[0].fatalBug;
+    //       const seriousBug = item.workData[0].seriousBug;
+    //       const mediumBug = item.workData[0].mediumBug;
+    //       const cosmeticBug = item.workData[0].cosmeticBug;
+    //       const fatalBugReport = item.workData[0].fatalBugReport;
+    //       const seriousBugReport = item.workData[0].seriousBugReport;
+    //       const mediumBugReport = item.workData[0].mediumBugReport;
+    //       const cosmeticBugReport = item.workData[0].cosmeticBugReport;
+
+    //       const li = document.createElement('li');
+    //       li.innerHTML = `
+    //         <strong>FullName:</strong> ${hovaTen}</td>
+    //         <strong>Project:</strong> ${project}</td>
+    //         <strong>Original Estimated:</strong> ${originalEstimated}</td>
+    //         <strong>Work Logged In Hours:</strong> ${workLoggedInHours}</td>
+    //         <strong>Done Point:</strong> ${donePoint}</td>
+    //         <strong>Not Done Point:</strong> ${notDonePoint}</td>
+    //         <strong>Over Due Point:</strong> ${overDuePoint}</td>
+    //         <strong>Early Due Point:</strong> ${earlyDuePoint}</td>
+    //         <strong>Over Plan Point:</strong> ${overPlanPoint}</td>
+    //         <strong>Reopen Point:</strong> ${reopenPoint}</td>
+    //         <strong>Fatal Bug:</strong> ${fatalBug}</td>
+    //         <strong>Serious Bug:</strong> ${seriousBug}</td>
+    //         <strong>Medium Bug:</strong> ${mediumBug}</td>
+    //         <strong>Cosmetic Bug:</strong> ${cosmeticBug}</td>
+    //         <strong>Fatal Bug Report:</strong> ${fatalBugReport}</td>
+    //         <strong>Serious Bug Report:</strong> ${seriousBugReport}</td>
+    //         <strong>Medium Bug Report:</strong> ${mediumBugReport}</td>
+    //         <strong>Cosmetic Bug Report:</strong> ${cosmeticBugReport}
+    //       `;
+    //       workList.appendChild(li);
+    //     });
+    //   });
+
+    fetch('http://localhost:8088/stats/testAPI')
+        .then(response => response.json())
+        .then(data => {
+            const workList = document.getElementById('tbody');
+            let count = 1;
+            data.forEach(item => {
+                const stt = item.id;
+                const hovaten = item.fullName;
+                const email = item.email;
+                var newEle = document.createElement('tr');
+                newEle.innerHTML = `<td class="stickyCol" rowspan="${(item.workData).length + 1}">${stt}</td>
+                                        <td class="stickyCol truncate-text" rowspan="${(item.workData).length + 1}">${hovaten}</td>
+                                    <td rowspan="${(item.workData).length + 1}">${email}</td>`;
+                workList.appendChild(newEle);
+                (item.workData).forEach(workdata => {
+                    count++;
+                    const project = workdata.projectName;
+                    const originalEstimated = Math.round(workdata.originalEstimated / 3600);
+                    const workLoggedInHours = Math.round(workdata.workLoggedInHours / 3600);
+                    const donePoint = Math.round(workdata.donePoint / 3600);
+                    const notDonePoint = Math.round(workdata.notDonePoint / 3600);
+                    const overDuePoint = Math.round(workdata.overDuePoint / 3600);
+                    const earlyDuePoint = Math.round(workdata.earlyDuePoint / 3600);
+                    const overPlanPoint = Math.round(workdata.overPlanPoint / 3600);
+                    const reopenPoint = Math.round(workdata.reopenPoint / 3600);
+                    const missing = Math.round(workdata.missing / 3600);
+                    const fatalBug = Math.round(workdata.fatalBug / 3600);
+                    const seriousBug = Math.round(workdata.seriousBug / 3600);
+                    const mediumBug = Math.round(workdata.mediumBug / 3600);
+                    const cosmeticBug = Math.round(workdata.cosmeticBug / 3600);
+                    const fatalBugReport = Math.round(workdata.fatalBugReport / 3600);
+                    const seriousBugReport = Math.round(workdata.seriousBugReport / 3600);
+                    const mediumBugReport = Math.round(workdata.mediumBugReport / 3600);
+                    const cosmeticBugReport = Math.round(workdata.cosmeticBugReport / 3600);
+
+                    var newEle1 = document.createElement('tr');
+                    newEle1.innerHTML = `<td> ${project}</td>
+                                            <td>${originalEstimated}</td>
+                                                <td> ${missing}</td>
+                                                    <td> ${donePoint}</td>
+                                                        <td> ${notDonePoint}</td>
+                                                            <td> ${overDuePoint}</td>
+                                                                <td> ${earlyDuePoint}</td>
+                                                                    <td> ${overPlanPoint}</td>
+                                                                        <td> ${reopenPoint}</td>
+                                                                        <td> ${workLoggedInHours}</td>
+                                                                            <td> ${fatalBug}</td>
+                                                                                <td> ${seriousBug}</td>
+                                                                                    <td> ${mediumBug}</td>
+                                                                                        <td> ${cosmeticBug}</td>
+                                                                                            <td> ${fatalBugReport}</td>
+                                                                                                <td> ${seriousBugReport}</td>
+                                                                                                    <td> ${mediumBugReport}</td>
+                                                                                                        <td> ${cosmeticBugReport}</td>
+                                                                                                        `; workList.appendChild(newEle1);
+                    if ((parseInt(count)) % 2 !== 0) {
+                        newEle1.classList.add('odd');
+                    }
+                    // 
+
+                });
+
+
+            });
+        });
+
+
+</script>
 
 </html>

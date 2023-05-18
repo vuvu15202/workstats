@@ -12,6 +12,6 @@ import vpnt.si.work.stats.example.workstats.model.MonthlyStats;
 @Repository
 public interface MonthlyStatsRepository extends JpaRepository<MonthlyStats, Integer> {
 	List<MonthlyStats> findByFullNameContainingIgnoreCase(String name);
-	@Query(value = "SELECT * FROM Monthly_Stats WHERE full_name LIKE %:fullName% AND email LIKE %:email% AND month LIKE %:month% AND month LIKE %:year%", nativeQuery = true)
-	List<MonthlyStats> searchByAll(@Param("fullName") String fullName, @Param("email") String email, @Param("month") String month, @Param("year") String year);
+	@Query(value = "SELECT * FROM Monthly_Stats WHERE full_name LIKE %:fullName% AND email LIKE %:email% AND month LIKE :month% AND month LIKE %:year AND work_data LIKE %:work_data%", nativeQuery = true)
+	List<MonthlyStats> searchByAll(@Param("fullName") String fullName, @Param("email") String email, @Param("month") String month, @Param("year") String year, @Param("work_data") String work_data);
 }

@@ -10,7 +10,7 @@ public class WorkData {
 	private int earlyDuePoint;
 	private int overPlanPoint;
 	private int reopenPoint;
-	private int totalLogwork;
+	private int missing;
 	private int fatalBug;
 	private int seriousBug;
 	private int mediumBug;
@@ -45,17 +45,17 @@ public class WorkData {
 		this.seriousBugReport = seriousBugReport;
 		this.mediumBugReport = mediumBugReport;
 		this.cosmeticBugReport = cosmeticBugReport;
-		this.totalLogwork = workLoggedInHours + donePoint + notDonePoint + 
-				overDuePoint + earlyDuePoint +overPlanPoint + reopenPoint ;
+		this.missing = 0;
 	}
 	
 
-	public int getTotalLogwork() {
-		return totalLogwork;
+	
+	public int getMissing() {
+		return missing;
 	}
 
-	public void setTotalLogwork(int totalLogwork) {
-		this.totalLogwork = totalLogwork;
+	public void setMissing(int missing) {
+		this.missing = missing;
 	}
 
 	public String getProjectName() {

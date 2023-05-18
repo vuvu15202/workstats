@@ -6,6 +6,6 @@ import vpnt.si.work.stats.example.workstats.model.MonthlyStats;
 
 public interface IMonthlyStatsService {
 	List<MonthlyStats> listMonthlyStats();
-	List<MonthlyStats> listMonthlyStatsSearch(String fullName, String email, String month, String year);
+	List<MonthlyStats> listMonthlyStatsSearch(String fullName, String email, String month, String year, String project);
 	
 }
